@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
@@ -14,11 +13,6 @@ export const AppNavigator = StackNavigator({
 });
 
 class AppWithNavigationState extends React.Component {
-    static propTypes = {
-        dispatch: PropTypes.func.isRequired,
-        nav: PropTypes.object.isRequired,
-    };
-
     render() {
         const { dispatch, nav, auth } = this.props;
         return (

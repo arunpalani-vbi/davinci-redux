@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -31,10 +30,6 @@ const LoginScreen = ({ dispatch }) => (
         />
     </View>
 );
-
-// LoginScreen.propTypes = {
-//     navigation: PropTypes.object.isRequired,
-// };
 
 LoginScreen.navigationOptions = {
     title: 'Log In',
