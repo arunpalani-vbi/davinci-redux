@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { connect } from 'react-redux';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -35,10 +35,5 @@ LoginScreen.navigationOptions = {
     title: 'Log In',
 };
 
-const mapStateToProps = state => ({
-    nav: state.nav,
-    auth: state.auth,
-});
 
-
-export default connect(mapStateToProps)(LoginScreen);
+export default LoginScreen;

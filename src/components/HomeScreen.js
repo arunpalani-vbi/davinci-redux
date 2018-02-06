@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { NavigationActions } from 'react-navigation';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -36,15 +35,5 @@ const HomeScreen = ({ isLoggedIn, logout, loginScreen, reviewScreen, dispatch })
 HomeScreen.navigationOptions = {
     title: 'Home Screen',
 };
-const mapStateToProps = state => ({
-    isLoggedIn: state.auth.isLoggedIn,
-});
-const mapDispatchToProps = dispatch => ({
-    logout: () => dispatch({ type: 'Logout' }),
-    loginScreen: () =>
-        dispatch(NavigationActions.navigate({ routeName: 'Login' })),
-    reviewScreen: () =>
-        dispatch(NavigationActions.navigate({ routeName: 'Review' })),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default HomeScreen;

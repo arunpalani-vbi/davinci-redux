@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
-import LoginScreen from '../components/LoginScreen';
-import HomeScreen from '../components/HomeScreen';
+import LoginScreenContainer from '../containers/LoginScreenContainer';
+import HomeScreenContainer from '../containers/HomeScreenContainer';
 import ReviewScreen from '../components/ReviewScreen';
 import { addListener } from '../utils/redux';
 
 export const AppNavigator = StackNavigator({
-    Home: { screen: HomeScreen },
+    Home: { screen: HomeScreenContainer },
     Review: { screen: ReviewScreen },
 });
 
@@ -23,7 +23,7 @@ class AppWithNavigationState extends React.Component {
                         state: nav,
                         addListener,
                     })}
-                /> : <LoginScreen />
+                /> : <LoginScreenContainer />
         );
     }
 }
