@@ -16,7 +16,7 @@ import {
 import { LinearGradient } from 'expo';
 import {styles} from '../styles'
 
-const LoginForm = ({loginStatus,email,onLoginSubmit,onEmailChange,onPasswordChange}) => (
+const LoginForm = ({errorMessage,loginStatus,email,onLoginSubmit,onEmailChange,onPasswordChange}) => (
   <View style={styles.container}>
     <KeyboardAvoidingView
       behavior="position"
@@ -65,6 +65,8 @@ const LoginForm = ({loginStatus,email,onLoginSubmit,onEmailChange,onPasswordChan
             placeholderTextColor="#eee"
             secureTextEntry
           />
+           {loginStatus=="FAIL" ? <Text>{errorMessage}</Text>:null}
+           {loginStatus=="SUCCESS" ? <Text>SUCCESS</Text>:null}
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={onLoginSubmit}>
@@ -76,3 +78,4 @@ const LoginForm = ({loginStatus,email,onLoginSubmit,onEmailChange,onPasswordChan
 
   </View>
 )
+export default LoginForm

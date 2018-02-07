@@ -4,8 +4,8 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import ReporteeListContainer from './src/containers/ReporteeListContainer'
-import reducer from './src/reducers/reportees'
+import LoginContainer from './src/containers/LoginContainer'
+import reducer from './src/reducers/login'
 
 
 
@@ -23,10 +23,7 @@ export default class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <View style={styles.container}>
-                    <ReporteeListContainer />
-                </View>
-
+            <LoginContainer/>
             </Provider>
         );
     }
