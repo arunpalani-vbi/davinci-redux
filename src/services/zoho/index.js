@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-
+import endPoints from '../api/endpoint'
 const onLoginRequestSuccess = (response) => {
     let responseArray = response._bodyText.split('\n');
     let errorMessage = '';

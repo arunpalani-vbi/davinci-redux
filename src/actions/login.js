@@ -1,4 +1,4 @@
-import zohoService from '../services/zoho'
+import * as zohoService from '../services/zoho'
 export const requestLogin = () => ({
     type: "REQUEST_LOGIN",
 })
