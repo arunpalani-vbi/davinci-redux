@@ -7,33 +7,28 @@ import { createLogger } from 'redux-logger'
 import LoginContainer from './src/containers/LoginContainer'
 import reducer from './src/reducers/login'
 
+import AppReducer from './src/reducers';
+import AppWithNavigationState from './src/navigators/AppNavigator';
+import { middleware } from './src/utils/redux';
 
-
-const middleware = [thunk]
-if (process.env.NODE_ENV !== 'production') {
-    middleware.push(createLogger())
-}
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(
-    reducer,
-    applyMiddleware(...middleware)
-)
+    AppReducer,
+    composeWithDevTools(applyMiddleware(middleware, thunk)),
+);
 
-export default class App extends React.Component {
+class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
             <LoginContainer/>
+                <AppWithNavigationState />
             </Provider>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
+AppRegistry.registerComponent('Review360', () => App);
+
+export default App;
