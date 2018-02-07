@@ -30,9 +30,95 @@ function auth(state = initialAuthState, action) {
     }
 }
 
+/*
+State for Scrollable Tabs in Review Screen
+*/
+const initialReviewState = {
+    isInitialRoutesReady: false,
+    tabNavState: {
+        index: 0,
+        routes: null
+    },
+    questions: [
+        {
+            "id": 1,
+            "category": "Category1",
+            "question": "Q1"
+        },
+        {
+            "id": 2,
+            "category": "Category1",
+            "question": "Q2"
+        },
+        {
+            "id": 3,
+            "category": "Category2",
+            "question": "Q3"
+        },
+        {
+            "id": 4,
+            "category": "Category2",
+            "question": "Q4"
+        },
+        {
+            "id": 5,
+            "category": "Category3",
+            "question": "Q1"
+        },
+        {
+            "id": 6,
+            "category": "Category3",
+            "question": "Q2"
+        },
+        {
+            "id": 7,
+            "category": "Category4",
+            "question": "Q3"
+        },
+        {
+            "id": 8,
+            "category": "Category4",
+            "question": "Q1"
+        },
+        {
+            "id": 9,
+            "category": "Category5",
+            "question": "Q2"
+        },
+        {
+            "id": 10,
+            "category": "Category5",
+            "question": "Q3"
+        }
+    ]
+};
+
+function review(state = initialReviewState, action) {
+    let newState;
+    switch (action.type) {
+        case 'GET_INITITAL_STATE':
+            const categories = [...new Set(state.questions.map(question => question.category))];
+            const intialRoute = categories.reduce((o, key) => {
+                return o.concat({ key: key, title: key })
+            }, []);
+            newState = { ...state },
+                tabNavState = newState.tabNavState;
+            tabNavState.routes = intialRoute;
+            return newState;
+        case 'SCROLL_TAB_INDEX_CHANGE':
+            newState = { ...state },
+                tabNavState = newState.tabNavState;
+            tabNavState.index = action.index;
+            return newState;
+
+    }
+    return state;
+}
+
 const AppReducer = combineReducers({
     nav,
     auth,
+    review,
 });
 
 export default AppReducer;

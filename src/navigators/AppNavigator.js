@@ -4,12 +4,12 @@ import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import LoginScreenContainer from '../containers/LoginScreenContainer';
 import HomeScreenContainer from '../containers/HomeScreenContainer';
-import ReviewScreen from '../components/ReviewScreen';
+import ReviewScreenContainer from '../containers/ReviewScreenContainer';
 import { addListener } from '../utils/redux';
 
 export const AppNavigator = StackNavigator({
     Home: { screen: HomeScreenContainer },
-    Review: { screen: ReviewScreen },
+    Review: { screen: ReviewScreenContainer },
 });
 
 class AppWithNavigationState extends React.Component {
