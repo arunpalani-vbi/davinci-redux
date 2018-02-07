@@ -1,4 +1,4 @@
-const login = (state = {}, action) => {
+const login = (state = {loginStatus:"INITIAL"}, action) => {
     switch (action.type) {
 
         case 'REQUEST_LOGIN':

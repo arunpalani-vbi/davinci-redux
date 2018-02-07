@@ -1,32 +1,25 @@
 import React from 'react';
-import {
-  View,
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  Alert,
-  AsyncStorage,
-  ActivityIndicator
-} from 'react-native';
+import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Alert, AsyncStorage, ActivityIndicator } from 'react-native';
 import validate from 'validate.js'
 import { LinearGradient } from 'expo';
+
 import { styles } from '../styles'
+import constraints from '../utils/constrains'
+
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: '',
-      showForm: true
+      password: ''
+    }
+    this.navigationOptions = {
+      title: 'Log In',
     }
   }
 
   _loginToZoho = () => {
-    var errorData = validate(this.state, constraints);
+    var errorData = validate(this.state, constraints.login);
     if (errorData) {
       if (errorData.email) {
         Alert.alert(errorData.email[0]);
@@ -41,20 +34,14 @@ export default class LoginForm extends React.Component {
     this.props.performLogin(this.state.email, this.state.password);
   }
   render() {
-    const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
     return (
       <View style={styles.container}>
-
         <KeyboardAvoidingView
           behavior="position"
-          style={{
-            width: '100%',
-          }}
-          keyboardVerticalOffset={keyboardVerticalOffset}>
+          style={{ width: '100%' }}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}>
           <LinearGradient
-            style={{
-              padding: 20,
-            }}
+            style={{ padding: 20 }}
             colors={['#7ac4e8', '#1287d0']}>
             <View style={styles.logoContainer}>
               <Image
@@ -62,9 +49,9 @@ export default class LoginForm extends React.Component {
                 resizeMode={Image.resizeMode.contain}
                 source={require('../images/360logo.png')}
               />
-              {this.state.showForm ? null : <ActivityIndicator size={50} color="#fff" />}
+              {this.props.loginStatus == "LOADING" ? <ActivityIndicator color="#fff" /> : null}
             </View>
-            {this.state.showForm ? <View style={styles.formContainer}>
+            {this.props.loginStatus != "LOADING" ? <View style={styles.formContainer}>
               <Text style={styles.loginInfoText}>
                 Login with Zoho credentials
               </Text>
@@ -104,20 +91,8 @@ export default class LoginForm extends React.Component {
       </View>
     );
   }
+
+
 }
-const constraints = {
-  email: {
-    format: {
-      pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      message: '^Please enter a valid email'
-    },
-    presence: true,
-  },
-  password: {
-    presence: true,
-    length: {
-      minimum: 1,
-      message: "^Please enter password"
-    }
-  }
-};
+
+

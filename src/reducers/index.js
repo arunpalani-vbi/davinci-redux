@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { NavigationActions } from 'react-navigation';
 
 import { AppNavigator } from '../navigators/AppNavigator';
-
+import login from './login'
 const initialNavState = AppNavigator.router.getStateForAction(NavigationActions.init());
 
 function nav(state = initialNavState, action) {
@@ -17,22 +17,9 @@ function nav(state = initialNavState, action) {
     return nextState || state;
 }
 
-const initialAuthState = { isLoggedIn: false };
-
-function auth(state = initialAuthState, action) {
-    switch (action.type) {
-        case 'Login':
-            return { ...state, isLoggedIn: true };
-        case 'Logout':
-            return { ...state, isLoggedIn: false };
-        default:
-            return state;
-    }
-}
-
 const AppReducer = combineReducers({
     nav,
-    auth,
+    login
 });
 
 export default AppReducer;

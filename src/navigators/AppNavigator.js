@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
-import LoginScreenContainer from '../containers/LoginScreenContainer';
+import LoginContainer  from '../containers/LoginContainer';
 import HomeScreenContainer from '../containers/HomeScreenContainer';
 import ReviewScreen from '../components/ReviewScreen';
 import { addListener } from '../utils/redux';
@@ -14,23 +14,23 @@ export const AppNavigator = StackNavigator({
 
 class AppWithNavigationState extends React.Component {
     render() {
-        const { dispatch, nav, auth } = this.props;
+        const { dispatch, nav, loginStatus } = this.props;
         return (
-            auth.isLoggedIn ?
+            loginStatus=="SUCCESS" ?
                 <AppNavigator
                     navigation={addNavigationHelpers({
                         dispatch,
                         state: nav,
                         addListener,
                     })}
-                /> : <LoginScreenContainer />
+                /> : <LoginContainer/>
         );
     }
 }
 
 const mapStateToProps = state => ({
     nav: state.nav,
-    auth: state.auth,
+    loginStatus: state.loginStatus
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);
