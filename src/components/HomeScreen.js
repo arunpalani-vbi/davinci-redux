@@ -1,35 +1,30 @@
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, ScrollView,ActivityIndicator} from 'react-native';
+import Cards from './Cards'
 
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
+        backgroundColor: '#f3f3f3',
+    }
 });
 
-const HomeScreen = ({ isLoggedIn, logout, loginScreen, reviewScreen, dispatch }) => {
-    if (!isLoggedIn) {
-        return <Text>Please log in</Text>;
+const HomeScreen = ({ isLoggedIn, isDirectReportsFetching, directReports, token, logout, loginScreen, reviewScreen, dispatch }) => {
+
+    if (!directReports) {
+        return <ActivityIndicator color="#1287d0" size="large" />;
+    } else {
+        const employeeCards = directReports.map(employee => (
+            <Cards onCardClick={reviewScreen} employeeData={employee} key={employee.ownerName} />
+        ));
+        return (
+            <ScrollView style={styles.container}>
+                {employeeCards}
+            </ScrollView>
+        )
     }
-    return (
-        <View style={styles.container}>
-            <Text style={styles.welcome}>
-                {'You are "logged in" right now'}
-            </Text>
-            <Button
-                onPress={reviewScreen}
-                title="Review"
-            />
-            <Button
-                title={isLoggedIn ? 'Log Out' : 'Open Login Screen'}
-                onPress={isLoggedIn ? logout : loginScreen}
-            />
-        </View>
-    )
+
 };
 
 HomeScreen.navigationOptions = {

@@ -18,5 +18,9 @@ const mapDispatchToProps = {
     getInitialState,
     handleIndexChange
 };
+const ReviewContainer = connect(
+    mapStateToProps
+)(ReviewScreen)
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewScreen);
+
+export default ReviewContainer

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 
 import CategoryPage from './CategoryPage'
+import { StyleSheet, Text, ScrollView } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
