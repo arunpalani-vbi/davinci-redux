@@ -1,38 +1,46 @@
 import { combineReducers } from 'redux';
 import { NavigationActions } from 'react-navigation';
-
 import { AppNavigator } from '../navigators/AppNavigator';
-
-const initialNavState = AppNavigator.router.getStateForAction(NavigationActions.init());
-
+import login from './login'
+import home from './home'
+import review from './review'
+// const initialNavState = AppNavigator.router.getStateForAction(NavigationActions.init());
+const firstAction = AppNavigator.router.getActionForPathAndParams('Home');
+const tempNavState = AppNavigator.router.getStateForAction(firstAction);
+const secondAction = AppNavigator.router.getActionForPathAndParams('Login');
+const initialNavState = AppNavigator.router.getStateForAction(
+  secondAction,
+  tempNavState
+);
 function nav(state = initialNavState, action) {
+    console.log("here1",action);
     let nextState;
     switch (action.type) {
-        default:
-            nextState = AppNavigator.router.getStateForAction(action, state);
-            break;
+      case 'LOGIN_SUCCESS':
+        nextState = AppNavigator.router.getStateForAction(
+          NavigationActions.back(),
+          state
+        );
+        break;
+      case 'LOGOUT':
+        nextState = AppNavigator.router.getStateForAction(
+          NavigationActions.navigate({ routeName: 'Login' }),
+          state
+        );
+        break;
+      default:
+        nextState = AppNavigator.router.getStateForAction(action, state);
+        break;
     }
-
+  
     // Simply return the original `state` if `nextState` is null or undefined.
     return nextState || state;
-}
-
-const initialAuthState = { isLoggedIn: false };
-
-function auth(state = initialAuthState, action) {
-    switch (action.type) {
-        case 'Login':
-            return { ...state, isLoggedIn: true };
-        case 'Logout':
-            return { ...state, isLoggedIn: false };
-        default:
-            return state;
-    }
-}
-
+  }
 const AppReducer = combineReducers({
     nav,
-    auth,
+    login,
+    home,
+    review
 });
 
 export default AppReducer;

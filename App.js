@@ -1,8 +1,11 @@
 import React from 'react';
-import { AppRegistry } from 'react-native';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { StyleSheet, View } from 'react-native';
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import { createLogger } from 'redux-logger'
+import LoginContainer from './src/containers/LoginContainer'
+import reducer from './src/reducers/login'
 
 import AppReducer from './src/reducers';
 import AppWithNavigationState from './src/navigators/AppNavigator';
@@ -25,6 +28,6 @@ class App extends React.Component {
     }
 }
 
-AppRegistry.registerComponent('Review360', () => App);
+// AppRegistry.registerComponent('Review360', () => App);
 
 export default App;
