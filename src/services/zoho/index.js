@@ -29,8 +29,9 @@ const onLoginRequestSuccess = (response) => {
 };
 
 const onRequestFail = (error) => {
+    console.log(error);
     let errorMessage = 'UNKNOWN';
-    return { errorMessage }
+    throw new Error(errorMessage);
 }
 
 const fetchLoginToken = (email, password) => {
@@ -50,3 +51,10 @@ export const authenticate = (email, password) =>
     fetchLoginToken(email, password)
         .then(onLoginRequestSuccess).catch(onRequestFail)
 
+export const getDirectReports = (token) => {
+    return fetch(endPoints.zoho.employeeView + `?authtoken=${token}`, {
+        method: 'GET'
+    }).then(response => {
+        return JSON.parse(response._bodyText);
+    });
+}

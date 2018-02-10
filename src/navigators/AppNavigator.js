@@ -4,33 +4,32 @@ import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import LoginContainer  from '../containers/LoginContainer';
 import HomeScreenContainer from '../containers/HomeScreenContainer';
-import ReviewScreen from '../components/ReviewScreen';
+import ReviewScreenContainer from '../containers/ReviewScreenContainer';
 import { addListener } from '../utils/redux';
 
 export const AppNavigator = StackNavigator({
     Home: { screen: HomeScreenContainer },
-    Review: { screen: ReviewScreen },
+    Review: { screen: ReviewScreenContainer },
+    Login:{ screen : LoginContainer}
 });
 
 class AppWithNavigationState extends React.Component {
     render() {
-        const { dispatch, nav, loginStatus } = this.props;
+        const { dispatch, nav } = this.props;
         return (
-            loginStatus=="SUCCESS" ?
                 <AppNavigator
                     navigation={addNavigationHelpers({
                         dispatch,
                         state: nav,
                         addListener,
                     })}
-                /> : <LoginContainer/>
+                />
         );
     }
 }
 
 const mapStateToProps = state => ({
-    nav: state.nav,
-    loginStatus: state.loginStatus
+    nav: state.nav
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);

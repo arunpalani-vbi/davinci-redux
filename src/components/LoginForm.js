@@ -14,7 +14,7 @@ export default class LoginForm extends React.Component {
       password: ''
     }
     this.navigationOptions = {
-      title: 'Log In',
+      title: 'Login',
     }
   }
 
@@ -49,9 +49,9 @@ export default class LoginForm extends React.Component {
                 resizeMode={Image.resizeMode.contain}
                 source={require('../images/360logo.png')}
               />
-              {this.props.loginStatus == "LOADING" ? <ActivityIndicator color="#fff" /> : null}
+              {this.props.isLoginFetching || this.props.isLoggedIn ? <ActivityIndicator size="large" color="#fff" /> : null}
             </View>
-            {this.props.loginStatus != "LOADING" ? <View style={styles.formContainer}>
+            {!this.props.isLoginFetching && !this.props.isLoggedIn ? <View style={styles.formContainer}>
               <Text style={styles.loginInfoText}>
                 Login with Zoho credentials
               </Text>

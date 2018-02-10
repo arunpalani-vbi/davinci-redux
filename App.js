@@ -22,13 +22,12 @@ class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-            <LoginContainer/>
                 <AppWithNavigationState />
             </Provider>
         );
     }
 }
 
-AppRegistry.registerComponent('Review360', () => App);
+// AppRegistry.registerComponent('Review360', () => App);
 
 export default App;

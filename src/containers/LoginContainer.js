@@ -4,14 +4,14 @@ import { performLogin } from '../actions/login'
 import LoginForm from '../components/LoginForm'
 
 const mapStateToProps = (state) => ({
-  email: state.email,
-  password: state.password,
-  loginStatus: state.loginStatus
+  isLoginFetching: state.login.isLoginFetching,
+  isLoggedIn: state.login.isLoggedIn,
+  errorMessage: state.login.errorMessage
 })
 
 const mapDispatchToProps = dispatch => ({
-  performLogin:(username,password)=>{
-   dispatch(performLogin(username,password));
+  performLogin: (username, password) => {
+    dispatch(performLogin(username, password));
   }
 })
 

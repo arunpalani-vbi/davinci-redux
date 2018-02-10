@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ScrollView } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -15,15 +15,12 @@ const styles = StyleSheet.create({
     },
 });
 
-const ReviewScreen = () => (
-    <View style={styles.container}>
+const ReviewScreen = ({ questions }) => (
+    <ScrollView>
         <Text style={styles.welcome}>
-            Review Screen
-    </Text>
-        <Text style={styles.welcome}>
-            List of question goes here
-    </Text>
-    </View>
+            {JSON.stringify(questions)}
+        </Text>
+    </ScrollView>
 );
 
 ReviewScreen.navigationOptions = {
