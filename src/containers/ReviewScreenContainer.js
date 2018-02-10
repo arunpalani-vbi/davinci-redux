@@ -19,7 +19,8 @@ const mapDispatchToProps = {
     handleIndexChange
 };
 const ReviewContainer = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(ReviewScreen)
 
 

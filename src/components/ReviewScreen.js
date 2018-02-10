@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+import _ from 'lodash'
 
 import CategoryPage from './CategoryPage'
-import { StyleSheet, Text, ScrollView } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -23,12 +23,15 @@ const initialLayout = {
 };
 const ReviewScreen = ({ index, routes, questions, tabNavState, handleIndexChange, getInitialState, dispatch }) => {
 
-    if (routes) {
-        const categories = [...new Set(questions.map(question => question.category))];
+    if (routes && questions) {
+        const categories = Object.keys(questions);
 
         const getCategoryPage = (value) => (value => (<CategoryPage />))
 
-        const sceneToMap = categories.reduce((o, key) => ({ ...o, [key]: (key) => <CategoryPage /> }), {});
+        const sceneToMap = categories.reduce((o, key) => ({
+            ...o, [key]: () => <CategoryPage />
+
+        }), {});
 
         const renderScene = SceneMap(sceneToMap);
         const renderHeader = props => <TabBar {...props} scrollEnabled />;

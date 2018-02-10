@@ -38,7 +38,9 @@ export const fetchQuestion = (employeeId, timePeriod) => {
             return _.groupBy(questions, "behaviourImpact");
         });
     };
-    return new Promise.all([questionsRef.once('value').then(processQuestionSnapshot)]).then((response) => response)
+    return new Promise.all([questionsRef.once('value').then(processQuestionSnapshot)]).then((response) => {
+        return response[0]
+    })
     // return questionsRef.once('value').then(processQuestionSnapshot);
 
 }
