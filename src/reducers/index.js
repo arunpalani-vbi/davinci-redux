@@ -35,7 +35,10 @@ function nav(state = initialNavState, action) {
   
     // Simply return the original `state` if `nextState` is null or undefined.
     return nextState || state;
-  }
+}
+
+
+
 const AppReducer = combineReducers({
     nav,
     login,

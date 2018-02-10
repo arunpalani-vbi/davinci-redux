@@ -10,11 +10,12 @@ export const loginScreen = () => dispatch => {
 }
 
 export const reviewScreen = (employeeId, timePeriod) => dispatch => {
-    dispatch(NavigationActions.navigate({ routeName: 'Review' }))
 
     return fetchQuestion(employeeId, timePeriod).then(questions => {
         console.log(questions);
         dispatch({ type: "FETCH_QUESTIONS_FULLFILLED", questions });
+
+        dispatch(NavigationActions.navigate({ routeName: 'Review' }))
     }).catch(error => {
         dispatch({ type: "FETCH_QUESTIONS_REJECTED", errorMessage: error.message })
     });
